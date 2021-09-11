@@ -5,11 +5,17 @@ connectToMongo()
 const app = express()
 const port = 3000
 
-//endpoint
-app.get('/', (req, res) => {
-  res.send('Hello Abhishek!')
-})
+//endpoint default
+// app.get('/',(req,res)=>{
+//   res.send('Hello bro')
+// })
 
+
+//Available Routes
+app.use('/api/auth',require('./routes/auth'))
+app.use('/api/notes',require('./routes/notes'))
+
+//listening to the port
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
