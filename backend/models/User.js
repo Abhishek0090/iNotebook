@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 //authentication setup
 const UserSchema = new Schema({
@@ -16,8 +17,7 @@ const UserSchema = new Schema({
         required : true
     },
     Date : {
-        type : Date,
-        required : Date.now
+        type : Date
     }
   });
 
