@@ -23,6 +23,6 @@ const UserSchema = new Schema({
   });
 
   const User = mongoose.model('user',UserSchema)
-  User.createIndexes(); //creating indexes for different ids in our database
+//   User.createIndexes(); //creating indexes for different ids in our database
 
   module.exports = User
