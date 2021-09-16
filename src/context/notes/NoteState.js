@@ -30,6 +30,24 @@ const NoteState = (props)=>{
       "tag": "Tatakae and  Fidget Spinner",
       "Date": "2021-09-13T15:02:48.670Z",
       "__v": 0
+    },
+    {
+      "_id": "613f68183185566440f5bbfd",
+      "user": "613f26690f20ea610b232aab",
+      "title": "Attack on Titan",
+      "description": "Eren Yaegar And Levi Ackerman",
+      "tag": "Tatakae and  Fidget Spinner",
+      "Date": "2021-09-13T15:02:48.670Z",
+      "__v": 0
+    },
+    {
+      "_id": "613f68183185566440f5bbfd",
+      "user": "613f26690f20ea610b232aab",
+      "title": "Attack on Titan",
+      "description": "Eren Yaegar And Levi Ackerman",
+      "tag": "Tatakae and  Fidget Spinner",
+      "Date": "2021-09-13T15:02:48.670Z",
+      "__v": 0
     }
   ]
   const [notes, setNotes] = useState(notesInitial)
