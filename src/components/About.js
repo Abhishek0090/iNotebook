@@ -5,7 +5,7 @@ export default function About() {
 
     return (
         <div>
-            This is about and He is the best
+            I m Abhishek and i dont know what i m doing in my life
         </div>
     )
 }

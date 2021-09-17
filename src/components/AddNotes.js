@@ -18,7 +18,7 @@ const AddNotes = () => {
   return (
     <div className="container my-3">
       <h1>Add a Note</h1>
-      <form>
+      <form className="my-3">
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
             Title
@@ -39,7 +39,6 @@ const AddNotes = () => {
           <label
             htmlFor="description"
             className="form-label"
-            onChange={onChange}
           >
             Description
           </label>
@@ -55,7 +54,7 @@ const AddNotes = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="tag" className="form-label" onChange={onChange}>
+          <label htmlFor="tag" className="form-label">
             Tag
           </label>
           <input

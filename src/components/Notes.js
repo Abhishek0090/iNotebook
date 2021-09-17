@@ -1,14 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import { useContext , useState } from "react";
+import { useContext, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import AddNotes from "./AddNotes";
 import NoteItem from "./NoteItem";
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, getNotes , addNote , editNote}  = context;
+  const { notes, getNotes, editNote } = context;
 
-  const [note, setNote] = useState({id:"",etitle:"", edescription:"", etag : ""})
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "",
+  });
 
   useEffect(() => {
     getNotes();
@@ -17,17 +22,22 @@ const Notes = () => {
 
   const updatenote = (currentNote) => {
     ref.current.click();
-    setNote({id : currentNote._id,etitle:currentNote.title, edescription : currentNote.description , etag : currentNote.tag});
+    setNote({
+      id: currentNote._id,
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
   };
 
   const ref = useRef(null);
   const refClose = useRef(null);
 
   const handleClick = (e) => {
-    editNote(note.id,note.etitle,note.edescription,note.etag);
-   refClose.current.click();
-    // addNote(note.title, note.description, note.tag);
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+    refClose.current.click();
   };
+
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
@@ -42,8 +52,8 @@ const Notes = () => {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         ref={ref}
-          >
-          Launch
+      >
+        Launch
       </button>
 
       <div
@@ -80,14 +90,12 @@ const Notes = () => {
                     aria-describedby="emailHelp"
                     onChange={onChange}
                     value={note.etitle}
-                    
                   />
                 </div>
                 <div className="mb-3">
                   <label
                     htmlFor="description"
                     className="form-label"
-                    onChange={onChange}
                   >
                     Description
                   </label>
@@ -106,7 +114,6 @@ const Notes = () => {
                   <label
                     htmlFor="tag"
                     className="form-label"
-                    onChange={onChange}
                   >
                     Tag
                   </label>
@@ -130,7 +137,14 @@ const Notes = () => {
               >
                 Close
               </button>
-              <button  disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" onClick={handleClick} onChange={onChange}>
+              <button
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
+                type="button"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
                 Update Note
               </button>
             </div>
@@ -140,7 +154,7 @@ const Notes = () => {
       <div className="row my-3">
         <h1>Your Notes</h1>
         <div className="container mx-2">
-          {notes.length === 0 && 'No notes to display'}
+          {notes.length === 0 && "No notes to display"}
         </div>
         {notes.map((note) => {
           return (
