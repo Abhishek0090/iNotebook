@@ -6,9 +6,9 @@ import NoteItem from "./NoteItem";
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, getNotes , addNote} = context;
+  const { notes, getNotes , addNote , editNote}  = context;
 
-  const [note, setNote] = useState({etitle:"", edescription:"", etag : ""})
+  const [note, setNote] = useState({id:"",etitle:"", edescription:"", etag : ""})
 
   useEffect(() => {
     getNotes();
@@ -17,14 +17,16 @@ const Notes = () => {
 
   const updatenote = (currentNote) => {
     ref.current.click();
-    setNote({etitle:currentNote.title, edescription : currentNote.description , etag : currentNote.tag});
+    setNote({id : currentNote._id,etitle:currentNote.title, edescription : currentNote.description , etag : currentNote.tag});
   };
 
   const ref = useRef(null);
+  const refClose = useRef(null);
 
   const handleClick = (e) => {
-    console.log("updating the note", note)
-    e.preventDefault();
+    console.log("updating the note", note)  
+    editNote(note.id,note.etitle,note.edescription,note.etag);
+   refClose.current.click();
     // addNote(note.title, note.description, note.tag);
   };
   const onChange = (e) => {
@@ -122,6 +124,7 @@ const Notes = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                ref={refClose}
               >
                 Close
               </button>
