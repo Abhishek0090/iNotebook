@@ -24,7 +24,6 @@ const Notes = () => {
   const refClose = useRef(null);
 
   const handleClick = (e) => {
-    console.log("updating the note", note)  
     editNote(note.id,note.etitle,note.edescription,note.etag);
    refClose.current.click();
     // addNote(note.title, note.description, note.tag);
@@ -44,7 +43,7 @@ const Notes = () => {
         data-bs-target="#exampleModal"
         ref={ref}
           >
-          Launch demo modal
+          Launch
       </button>
 
       <div
@@ -81,6 +80,7 @@ const Notes = () => {
                     aria-describedby="emailHelp"
                     onChange={onChange}
                     value={note.etitle}
+                    
                   />
                 </div>
                 <div className="mb-3">
@@ -98,6 +98,8 @@ const Notes = () => {
                     name="edescription"
                     onChange={onChange}
                     value={note.edescription}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -128,7 +130,7 @@ const Notes = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary" onClick={handleClick} onChange={onChange}>
+              <button  disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" onClick={handleClick} onChange={onChange}>
                 Update Note
               </button>
             </div>
@@ -137,6 +139,9 @@ const Notes = () => {
       </div>
       <div className="row my-3">
         <h1>Your Notes</h1>
+        <div className="container mx-2">
+          {notes.length === 0 && 'No notes to display'}
+        </div>
         {notes.map((note) => {
           return (
             <NoteItem key={note._id} updatenote={updatenote} note={note} />
