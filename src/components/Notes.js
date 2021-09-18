@@ -1,13 +1,29 @@
 import React, { useEffect, useRef } from "react";
 import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import NoteContext from "../context/notes/NoteContext";
 import AddNotes from "./AddNotes";
 import NoteItem from "./NoteItem";
 
 const Notes = (props) => {
-  const {showAlert} = props;
+  const { showAlert } = props;
+  let history = useHistory();
   const context = useContext(NoteContext);
+
   const { notes, getNotes, editNote } = context;
+
+
+  const ref = useRef(null);
+  const refClose = useRef(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getNotes();
+      // eslint-disable-next-line
+    } else {
+      history.push("/login");
+    }
+  }, []);
 
   const [note, setNote] = useState({
     id: "",
@@ -15,11 +31,6 @@ const Notes = (props) => {
     edescription: "",
     etag: "",
   });
-
-  useEffect(() => {
-    getNotes();
-    // eslint-disable-next-line
-  }, []);
 
   const updatenote = (currentNote) => {
     ref.current.click();
@@ -29,16 +40,13 @@ const Notes = (props) => {
       edescription: currentNote.description,
       etag: currentNote.tag,
     });
-    showAlert("Updated SuccessFully","success")
+    showAlert("Updated SuccessFully", "success");
   };
-
-  const ref = useRef(null);
-  const refClose = useRef(null);
 
   const handleClick = (e) => {
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
-    showAlert("Updated Successfully","success")
+    showAlert("Updated Successfully", "success");
   };
 
   const onChange = (e) => {
@@ -47,7 +55,7 @@ const Notes = (props) => {
 
   return (
     <>
-      <AddNotes showAlert={showAlert}/>
+      <AddNotes showAlert={showAlert} />
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -76,10 +84,11 @@ const Notes = (props) => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+              >
+              </button>
             </div>
             <div className="modal-body">
-              <form>
+              <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
                     Title
@@ -95,10 +104,7 @@ const Notes = (props) => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label
-                    htmlFor="description"
-                    className="form-label"
-                  >
+                  <label htmlFor="description" className="form-label">
                     Description
                   </label>
                   <input
@@ -113,10 +119,7 @@ const Notes = (props) => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label
-                    htmlFor="tag"
-                    className="form-label"
-                  >
+                  <label htmlFor="tag" className="form-label">
                     Tag
                   </label>
                   <input
@@ -158,9 +161,14 @@ const Notes = (props) => {
         <div className="container mx-2">
           {notes.length === 0 && "No notes to display"}
         </div>
-        {notes.map((note) => {
+        {notes.map(note => {
           return (
-            <NoteItem key={note._id} updatenote={updatenote} showAlert={showAlert} note={note} />
+            <NoteItem
+              key={note._id}
+              updatenote={updatenote}
+              showAlert={showAlert}
+              note={note}
+            />
           );
         })}
       </div>

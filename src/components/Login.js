@@ -11,7 +11,7 @@ const Login = (props) => {
     const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         email: credentials.email,
@@ -23,8 +23,8 @@ const Login = (props) => {
     if(json.success){
         //Save the auth token and redirect
         localStorage.setItem('token',json.authtoken)
-        history.push('/');
         showAlert("Logged in successfully","success")
+        history.push('/');
     }
     else{
         showAlert("Failed to Log in :( Try again","danger")
@@ -34,7 +34,8 @@ const Login = (props) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <div>
+    <div className="container mt-2">
+      <h2>Log in for entering into iNotebook</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
